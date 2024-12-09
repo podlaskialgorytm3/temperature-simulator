@@ -29,10 +29,11 @@ void printStruct(temperaturePointer list)
     while (list != NULL)
     {
         printf("%8.2f *C", list->value);
-        if (list->x > list->next->x)
+        if (list->next != NULL && list->x > list->next->x)
         {
             printf("\n");
         }
         list = list->next;
     }
+    printf("\n");
 }
