@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 {
     temperaturePointer tempList = NULL;
 
-    getRandomTemperatures(&tempList, -10.4, 40.3, 10, 5);
+    getRandomTemperatures(&tempList, -10.4, 40.3, 10, 15);
 
     printStruct(tempList);
 
