@@ -11,4 +11,6 @@ typedef struct temperature
 
 temperaturePointer insert(temperaturePointer list, int x, int y, double value);
 
+void printStruct(temperaturePointer list);
+
 #endif

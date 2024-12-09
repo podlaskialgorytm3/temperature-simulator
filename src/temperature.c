@@ -9,7 +9,7 @@ temperaturePointer insert(temperaturePointer list, int x, int y, double value)
         temperaturePointer newTemperature = (temperaturePointer)malloc(sizeof(temperature));
         if (newTemperature == NULL)
         {
-            exit(0);
+            exit(1);
         }
         newTemperature->x = x;
         newTemperature->y = y;
@@ -21,5 +21,14 @@ temperaturePointer insert(temperaturePointer list, int x, int y, double value)
     {
         list->next = insert(list->next, x, y, value);
         return list;
+    }
+}
+
+void printStruct(temperaturePointer list)
+{
+    while (list != NULL)
+    {
+        printf("[%d,%d] = %.2f\n", list->x, list->y, list->value);
+        list = list->next;
     }
 }
