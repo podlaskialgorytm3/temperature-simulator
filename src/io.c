@@ -14,11 +14,7 @@ void writeToFile(char *filename, temperaturePointer list)
 
     while (list != NULL)
     {
-        fprintf(file, "%8.2f", list->value);
-        if (list->next != NULL && list->x > list->next->x)
-        {
-            fprintf(file, "\n");
-        }
+        fprintf(file, "%8.2f %d %d \n", list->value, list->x, list->y);
         list = list->next;
     }
     fprintf(file, "\n");
@@ -35,24 +31,14 @@ void readFromFile(char *filename, temperaturePointer *list)
     }
 
     double value;
-    int x = 1;
-    int y = 1;
+    int x;
+    int y;
 
     int c;
 
-    while (fscanf(file, "%lf", &value) != EOF)
+    while (fscanf(file, "%lf %d %d \n", &value, &x, &y) != EOF)
     {
         *list = insert(*list, x, y, value);
-        c = fgetc(file);
-        if (c == '\n' || c == EOF)
-        {
-            y++;
-            x = 1;
-        }
-        else
-        {
-            x++;
-        }
     }
     fclose(file);
 }
