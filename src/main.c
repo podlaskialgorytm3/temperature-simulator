@@ -3,6 +3,7 @@
 #include "../include/temperature.h"
 #include "../include/generate-structure.h"
 #include "../include/io.h"
+#include "../include/set-temperature.h"
 
 int main(int argc, char **argv)
 {
@@ -21,6 +22,16 @@ int main(int argc, char **argv)
     if (mode == 1)
     {
         readFromFile("data.txt", &tempList);
+        int feature = atoi(argv[2]);
+        if (feature == 2)
+        {
+            int x = atoi(argv[3]);
+            int y = atoi(argv[4]);
+            double newValue = atoi(argv[5]);
+            printf("Mesh with new value!:\n");
+            tempList = changeValue(tempList, x, y, newValue);
+        }
+        writeToFile("data.txt", tempList);
     }
 
     printStruct(tempList);

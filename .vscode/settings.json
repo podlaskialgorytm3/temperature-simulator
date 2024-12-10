@@ -56,6 +56,11 @@
   "files.associations": {
     "stdio.h": "c",
     "temperature.h": "c",
-    "generate-structure.h": "c"
+    "generate-structure.h": "c",
+    "compare": "c",
+    "concepts": "c",
+    "type_traits": "c",
+    "new": "c",
+    "typeinfo": "c"
   }
 }

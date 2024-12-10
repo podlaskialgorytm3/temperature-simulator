@@ -7,9 +7,10 @@ gcc -c src\main.c -o build\object-files\main.o
 gcc -c src\temperature.c -o build\object-files\temperature.o
 gcc -c src\generate-structure.c -o build\object-files\generate-structure.o
 gcc -c src\io.c -o build\object-files\io.o
+gcc -c src\set-temperature.c -o build\object-files\set-temperature.o
 
 rem Link object files into an executable
-gcc build\object-files\main.o build\object-files\temperature.o build\object-files\generate-structure.o build\object-files\io.o -o program.exe
+gcc build\object-files\main.o build\object-files\temperature.o build\object-files\generate-structure.o build\object-files\io.o build\object-files\set-temperature.o -o program.exe
 
 
 rem End of script
