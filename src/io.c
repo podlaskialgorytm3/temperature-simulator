@@ -24,3 +24,35 @@ void writeToFile(char *filename, temperaturePointer list)
     fprintf(file, "\n");
     fclose(file);
 }
+void readFromFile(char *filename, temperaturePointer *list)
+{
+    FILE *file = fopen(filename, "r");
+
+    if (file == NULL)
+    {
+        printf("Erorr with reading from file: %s \n", filename);
+        return;
+    }
+
+    double value;
+    int x = 1;
+    int y = 1;
+
+    int c;
+
+    while (fscanf(file, "%lf", &value) != EOF)
+    {
+        *list = insert(*list, x, y, value);
+        c = fgetc(file);
+        if (c == '\n' || c == EOF)
+        {
+            y++;
+            x = 1;
+        }
+        else
+        {
+            x++;
+        }
+    }
+    fclose(file);
+}
