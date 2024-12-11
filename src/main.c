@@ -23,13 +23,20 @@ int main(int argc, char **argv)
     {
         readFromFile("data.txt", &tempList);
         int feature = atoi(argv[2]);
-        if (feature == 2)
+        if (feature == 1)
         {
             int x = atoi(argv[3]);
             int y = atoi(argv[4]);
             double newValue = atoi(argv[5]);
             printf("Mesh with new value!:\n");
             tempList = changeValue(tempList, x, y, newValue);
+        }
+        else if (feature == 2)
+        {
+            int row = atoi(argv[3]);
+            int newRow = atoi(argv[4]);
+            printf("Changed row in mesh!:\n");
+            tempList = changeRow(tempList, row, newRow);
         }
         writeToFile("data.txt", tempList);
     }
