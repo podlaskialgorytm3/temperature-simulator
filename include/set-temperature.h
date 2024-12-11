@@ -4,5 +4,5 @@
 
 temperaturePointer changeValue(temperaturePointer list, int x, int y, double newValue);
 temperaturePointer changeRow(temperaturePointer list, int row, int newRow);
-
+temperaturePointer changeColumn(temperaturePointer list, int column, int newColumn);
 #endif

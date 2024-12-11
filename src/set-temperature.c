@@ -56,3 +56,38 @@ temperaturePointer changeRow(temperaturePointer list, int row, int newRow)
     }
     return list;
 }
+temperaturePointer changeColumn(temperaturePointer list, int column, int newColumn)
+{
+    if (list == NULL || column == newColumn)
+    {
+        return list;
+    }
+    temperaturePointer current = list;
+    while (current != NULL)
+    {
+        if (current->x == column)
+        {
+            current->x = -1;
+        }
+        current = current->next;
+    }
+    current = list;
+    while (current != NULL)
+    {
+        if (current->x == newColumn)
+        {
+            current->x = column;
+        }
+        current = current->next;
+    }
+    current = list;
+    while (current != NULL)
+    {
+        if (current->x == -1)
+        {
+            current->x = newColumn;
+        }
+        current = current->next;
+    }
+    return list;
+}

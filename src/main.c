@@ -38,6 +38,13 @@ int main(int argc, char **argv)
             printf("Changed row in mesh!:\n");
             tempList = changeRow(tempList, row, newRow);
         }
+        else if (feature == 3)
+        {
+            int column = atoi(argv[3]);
+            int newColumn = atoi(argv[4]);
+            printf("Changed column in mesh!:\n");
+            tempList = changeColumn(tempList, column, newColumn);
+        }
         writeToFile("data.txt", tempList);
     }
 
