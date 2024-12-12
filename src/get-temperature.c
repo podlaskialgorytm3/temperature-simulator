@@ -16,3 +16,18 @@ double getMinimumTemperature(temperaturePointer list)
     }
     return minimum;
 }
+
+double getMaximumTemperature(temperaturePointer list)
+{
+    temperaturePointer current = list;
+    double maximum = list->value;
+    while (current != NULL)
+    {
+        if (current->value > maximum)
+        {
+            maximum = current->value;
+        }
+        current = current->next;
+    }
+    return maximum;
+}

@@ -4,4 +4,6 @@
 
 double getMinimumTemperature(temperaturePointer list);
 
+double getMaximumTemperature(temperaturePointer list);
+
 #endif
