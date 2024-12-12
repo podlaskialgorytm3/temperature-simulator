@@ -37,3 +37,35 @@ void printStruct(temperaturePointer list)
     }
     printf("\n");
 }
+
+temperaturePointer sortListByCords(temperaturePointer list)
+{
+    if (list == NULL || list->next == NULL)
+    {
+        return list;
+    }
+    temperaturePointer sorted = NULL;
+
+    while (list != NULL)
+    {
+        temperaturePointer current = list;
+        list = list->next;
+        if (sorted == NULL || current->y < sorted->y || (current->y == sorted->y && current->x < sorted->x))
+        {
+            current->next = sorted;
+            sorted = current;
+        }
+        else
+        {
+            temperaturePointer temp = sorted;
+            while (temp->next != NULL && (temp->next->y < current->y || (temp->next->y == current->y && temp->next->x < current->x)))
+            {
+                temp = temp->next;
+            }
+            current->next = temp->next;
+            temp->next = current;
+        }
+    }
+
+    return sorted;
+}

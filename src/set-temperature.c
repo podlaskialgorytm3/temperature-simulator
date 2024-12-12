@@ -54,8 +54,10 @@ temperaturePointer changeRow(temperaturePointer list, int row, int newRow)
         }
         current = current->next;
     }
+    list = sortListByCords(list);
     return list;
 }
+
 temperaturePointer changeColumn(temperaturePointer list, int column, int newColumn)
 {
     if (list == NULL || column == newColumn)
@@ -89,5 +91,6 @@ temperaturePointer changeColumn(temperaturePointer list, int column, int newColu
         }
         current = current->next;
     }
+    list = sortListByCords(list);
     return list;
 }

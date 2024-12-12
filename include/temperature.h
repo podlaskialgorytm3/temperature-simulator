@@ -13,4 +13,6 @@ temperaturePointer insert(temperaturePointer list, int x, int y, double value);
 
 void printStruct(temperaturePointer list);
 
+temperaturePointer sortListByCords(temperaturePointer);
+
 #endif
