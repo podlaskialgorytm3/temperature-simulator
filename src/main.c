@@ -4,6 +4,7 @@
 #include "../include/generate-structure.h"
 #include "../include/io.h"
 #include "../include/set-temperature.h"
+#include "../include/get-temperature.h"
 
 int main(int argc, char **argv)
 {
@@ -44,6 +45,21 @@ int main(int argc, char **argv)
             int newColumn = atoi(argv[4]);
             printf("Changed column in mesh!:\n");
             tempList = changeColumn(tempList, column, newColumn);
+        }
+        else if (feature == 4)
+        {
+            double minimum = getMinimumTemperature(tempList);
+            printf("The minimum value: %.2f *C\n", minimum);
+        }
+        else if (feature == 5)
+        {
+            double maximum = getMaximumTemperature(tempList);
+            printf("The maximum value: %.2f *C\n", maximum);
+        }
+        else if (feature == 6)
+        {
+            double average = getAverageTemperature(tempList);
+            printf("The average value: %.2f *C\n", average);
         }
         writeToFile("data.txt", tempList);
     }
