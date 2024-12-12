@@ -31,3 +31,18 @@ double getMaximumTemperature(temperaturePointer list)
     }
     return maximum;
 }
+
+double getAverageTemperature(temperaturePointer list)
+{
+    temperaturePointer current = list;
+    int size = 0;
+    double sum = 0;
+    while (current != NULL)
+    {
+        sum += current->value;
+        size++;
+        current = current->next;
+    }
+    double avg = sum / size;
+    return avg;
+}
