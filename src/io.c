@@ -14,7 +14,7 @@ void writeToFile(char *filename, temperaturePointer list)
 
     while (list != NULL)
     {
-        fprintf(file, "%8.2f %d %d \n", list->value, list->x, list->y);
+        fprintf(file, "%8.2f %d %d %s\n", list->value, list->x, list->y, list->unit);
         list = list->next;
     }
     fprintf(file, "\n");
