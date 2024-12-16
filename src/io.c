@@ -33,12 +33,13 @@ void readFromFile(char *filename, temperaturePointer *list)
     double value;
     int x;
     int y;
+    char *unit;
 
     int c;
 
-    while (fscanf(file, "%lf %d %d \n", &value, &x, &y) != EOF)
+    while (fscanf(file, "%lf %d %d %s\n", &value, &x, &y, unit) != EOF)
     {
-        *list = insert(*list, x, y, value);
+        *list = insert(*list, x, y, value, unit);
     }
     fclose(file);
 }

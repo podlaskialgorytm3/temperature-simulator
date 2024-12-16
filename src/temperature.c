@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "../include/temperature.h"
 
-temperaturePointer insert(temperaturePointer list, int x, int y, double value)
+temperaturePointer insert(temperaturePointer list, int x, int y, double value, char *unit)
 {
     if (list == NULL)
     {
@@ -14,12 +14,13 @@ temperaturePointer insert(temperaturePointer list, int x, int y, double value)
         newTemperature->x = x;
         newTemperature->y = y;
         newTemperature->value = value;
+        newTemperature->unit = unit;
         newTemperature->next = NULL;
         return newTemperature;
     }
     else
     {
-        list->next = insert(list->next, x, y, value);
+        list->next = insert(list->next, x, y, value, unit);
         return list;
     }
 }
@@ -28,7 +29,7 @@ void printStruct(temperaturePointer list)
 {
     while (list != NULL)
     {
-        printf("%8.2f *C", list->value);
+        printf("%8.2f *%s", list->value, list->unit);
         if (list->next != NULL && list->x > list->next->x)
         {
             printf("\n");
@@ -66,6 +67,4 @@ temperaturePointer sortListByCords(temperaturePointer list)
             temp->next = current;
         }
     }
-
-    return sorted;
 }
