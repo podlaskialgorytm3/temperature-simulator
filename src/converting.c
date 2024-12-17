@@ -3,55 +3,46 @@
 #include <string.h>
 #include "../include/temperature.h"
 
-void covertUnit(temperaturePointer *list, char *targetUnit)
+temperaturePointer covertUnit(temperaturePointer list, char *targetUnit)
 {
-    temperaturePointer newList = *list;
-    if (strcmp(targetUnit, "C") == 0)
+    temperaturePointer current = list; // Wskaźnik na aktualny element listy
+    while (current != NULL)
     {
-        while (newList != NULL)
+        if (strcmp(targetUnit, "C") == 0)
         {
-            if (strcmp(newList->unit, "F") == 0)
+            if (strcmp(current->unit, "F") == 0)
             {
-                newList->value = 5.0 / 9.0 * (newList->value - 32);
+                current->value = 5.0 / 9.0 * (current->value - 32);
             }
-            else if (strcmp(newList->unit, "K") == 0)
+            else if (strcmp(current->unit, "K") == 0)
             {
-                newList->value = newList->value - 273.15;
+                current->value = current->value - 273.15;
             }
-            newList->unit = targetUnit;
-            newList = newList->next;
         }
-    }
-    else if (strcmp(targetUnit, "K") == 0)
-    {
-        while (newList != NULL)
+        else if (strcmp(targetUnit, "K") == 0)
         {
-            if (strcmp(newList->unit, "F") == 0)
+            if (strcmp(current->unit, "F") == 0)
             {
-                newList->value = 5.0 / 9.0 * (newList->value - 32) + 273.15;
+                current->value = 5.0 / 9.0 * (current->value - 32) + 273.15;
             }
-            else if (strcmp(newList->unit, "C") == 0)
+            else if (strcmp(current->unit, "C") == 0)
             {
-                newList->value = newList->value + 273.15;
+                current->value = current->value + 273.15;
             }
-            newList->unit = targetUnit;
-            newList = newList->next;
         }
-    }
-    else if (strcmp(targetUnit, "F") == 0)
-    {
-        while (newList != NULL)
+        else if (strcmp(targetUnit, "F") == 0)
         {
-            if (strcmp(newList->unit, "K") == 0)
+            if (strcmp(current->unit, "K") == 0)
             {
-                newList->value = 9.0 / 5.0 * (newList->value - 273.15) + 32;
+                current->value = 9.0 / 5.0 * (current->value - 273.15) + 32;
             }
-            else if (strcmp(newList->unit, "C") == 0)
+            else if (strcmp(current->unit, "C") == 0)
             {
-                newList->value = 9.0 / 5.0 * newList->value + 32;
+                current->value = 9.0 / 5.0 * current->value + 32;
             }
-            newList->unit = targetUnit;
-            newList = newList->next;
         }
+        current->unit = targetUnit; // Zaktualizuj jednostkę
+        current = current->next;    // Przejdź do następnego elementu
     }
+    return list; // Zwróć wskaźnik na początek listy
 }

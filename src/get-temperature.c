@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../include/get-temperature.h"
 #include "../include/temperature.h"
 #include "../include/converting.h"
@@ -18,40 +19,60 @@ tempInfoPointer insertTempInfo(tempInfoPointer list, double value, char *unit)
 
 tempInfoPointer getMinimumTemperature(temperaturePointer list)
 {
+    if (list == NULL)
+    {
+        return NULL;
+    }
+
     temperaturePointer current = list;
-    covertUnit(&current, "C"); // Konwertujemy wszystkie wartości na jednostkę "C" do porównania
     double minimum = current->value;
-    char *originalUnit = current->unit; // Zapamiętujemy oryginalną jednostkę
+    char *originalUnit = current->unit;
     int x = current->x;
     int y = current->y;
 
     while (current != NULL)
     {
-        if (current->value < minimum)
+
+        double currentValueInC = 0.0;
+        if (strcmp(current->unit, "F") == 0)
         {
-            minimum = current->value;
-            originalUnit = current->unit; // Aktualizujemy oryginalną jednostkę
+            currentValueInC = 5.0 / 9.0 * (current->value - 32);
+        }
+        else if (strcmp(current->unit, "K") == 0)
+        {
+            currentValueInC = current->value - 273.15;
+        }
+        else
+        {
+            currentValueInC = current->value;
+        }
+
+        if (currentValueInC < minimum)
+        {
+            minimum = currentValueInC;
+            originalUnit = current->unit;
             x = current->x;
             y = current->y;
+        }
+
+        current = current->next;
+    }
+
+    current = list;
+    while (current != NULL)
+    {
+        if (current->x == x && current->y == y)
+        {
+            minimum = current->value;
+            originalUnit = current->unit;
+            break;
         }
         current = current->next;
     }
 
-    // Znajdź odpowiedni węzeł dla minimum, używając oryginalnej jednostki
-    temperaturePointer current2 = list;
-    while (current2 != NULL)
-    {
-        if (x == current2->x && y == current2->y)
-        {
-            minimum = current2->value;     // Używamy wartości z odpowiedniego węzła
-            originalUnit = current2->unit; // Używamy oryginalnej jednostki
-            break;
-        }
-        current2 = current2->next;
-    }
-
     tempInfoPointer currentInfo = NULL;
-    currentInfo = insertTempInfo(currentInfo, minimum, originalUnit); // Zwracamy oryginalną jednostkę
+    currentInfo = insertTempInfo(currentInfo, minimum, originalUnit);
+
     return currentInfo;
 }
 

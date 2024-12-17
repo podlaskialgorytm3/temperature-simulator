@@ -2,6 +2,6 @@
 #define CONVERTING_
 #include "temperature.h"
 
-void covertUnit(temperaturePointer *list, char *targetUnit);
+temperaturePointer covertUnit(temperaturePointer list, char *targetUnit);
 
 #endif
