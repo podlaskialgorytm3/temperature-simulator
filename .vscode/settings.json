@@ -38,10 +38,7 @@
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
   "C_Cpp_Runner.includePaths": [],
-  "C_Cpp_Runner.includeSearch": [
-    "*",
-    "**/*"
-  ],
+  "C_Cpp_Runner.includeSearch": ["*", "**/*"],
   "C_Cpp_Runner.excludeSearch": [
     "**/build",
     "**/build/**",
@@ -65,6 +62,8 @@
     "type_traits": "c",
     "new": "c",
     "typeinfo": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "converting.h": "c",
+    "get-temperature.h": "c"
   }
 }

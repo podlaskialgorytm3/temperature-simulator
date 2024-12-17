@@ -1,20 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "../include/get-temperature.h"
 #include "../include/temperature.h"
+#include "../include/converting.h"
 
-double getMinimumTemperature(temperaturePointer list)
+tempInfoPointer insertTempInfo(tempInfoPointer list, double value, char *unit)
+{
+    tempInfoPointer newTempInfo = (tempInfoPointer)malloc(sizeof(tempInfo));
+    if (newTempInfo == NULL)
+    {
+        exit(1);
+    }
+    newTempInfo->value = value;
+    newTempInfo->unit = unit;
+    return newTempInfo;
+}
+
+tempInfoPointer getMinimumTemperature(temperaturePointer list)
 {
     temperaturePointer current = list;
-    double minimum = list->value;
+    covertUnit(&current, "C"); // Konwertujemy wszystkie wartości na jednostkę "C" do porównania
+    double minimum = current->value;
+    char *originalUnit = current->unit; // Zapamiętujemy oryginalną jednostkę
+    int x = current->x;
+    int y = current->y;
+
     while (current != NULL)
     {
         if (current->value < minimum)
         {
             minimum = current->value;
+            originalUnit = current->unit; // Aktualizujemy oryginalną jednostkę
+            x = current->x;
+            y = current->y;
         }
         current = current->next;
     }
-    return minimum;
+
+    // Znajdź odpowiedni węzeł dla minimum, używając oryginalnej jednostki
+    temperaturePointer current2 = list;
+    while (current2 != NULL)
+    {
+        if (x == current2->x && y == current2->y)
+        {
+            minimum = current2->value;     // Używamy wartości z odpowiedniego węzła
+            originalUnit = current2->unit; // Używamy oryginalnej jednostki
+            break;
+        }
+        current2 = current2->next;
+    }
+
+    tempInfoPointer currentInfo = NULL;
+    currentInfo = insertTempInfo(currentInfo, minimum, originalUnit); // Zwracamy oryginalną jednostkę
+    return currentInfo;
 }
 
 double getMaximumTemperature(temperaturePointer list)

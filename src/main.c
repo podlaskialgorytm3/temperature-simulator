@@ -5,6 +5,7 @@
 #include "../include/io.h"
 #include "../include/set-temperature.h"
 #include "../include/get-temperature.h"
+#include "../include/converting.h"
 
 int main(int argc, char **argv)
 {
@@ -48,8 +49,9 @@ int main(int argc, char **argv)
         }
         else if (feature == 4)
         {
-            double minimum = getMinimumTemperature(tempList);
-            printf("The minimum value: %.2f *C\n", minimum);
+            tempInfoPointer currentInfo = NULL;
+            currentInfo = getMinimumTemperature(tempList);
+            printf("The minimum value: %.2f *%s\n", currentInfo->value, currentInfo->unit);
         }
         else if (feature == 5)
         {
@@ -59,7 +61,7 @@ int main(int argc, char **argv)
         else if (feature == 6)
         {
             double average = getAverageTemperature(tempList);
-            printf("The average value: %.2f *C\n", average);
+            // printf("The average value: %.2f *C\n", average);
         }
         writeToFile("data.txt", tempList);
     }
