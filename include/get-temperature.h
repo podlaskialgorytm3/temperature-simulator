@@ -13,8 +13,8 @@ tempInfoPointer insertTempInfo(tempInfoPointer list, double value, char *unit);
 
 tempInfoPointer getMinimumTemperature(temperaturePointer list);
 
-double getMaximumTemperature(temperaturePointer list);
+tempInfoPointer getMaximumTemperature(temperaturePointer list);
 
-double getAverageTemperature(temperaturePointer list);
+tempInfoPointer getAverageTemperature(temperaturePointer list, char *unit);
 
 #endif

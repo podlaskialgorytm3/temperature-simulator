@@ -76,22 +76,66 @@ tempInfoPointer getMinimumTemperature(temperaturePointer list)
     return currentInfo;
 }
 
-double getMaximumTemperature(temperaturePointer list)
+tempInfoPointer getMaximumTemperature(temperaturePointer list)
 {
+    if (list == NULL)
+    {
+        return NULL;
+    }
+
     temperaturePointer current = list;
-    double maximum = list->value;
+    double maximum = current->value;
+    char *originalUnit = current->unit;
+    int x = current->x;
+    int y = current->y;
+
     while (current != NULL)
     {
-        if (current->value > maximum)
+
+        double currentValueInC = 0.0;
+        if (strcmp(current->unit, "F") == 0)
+        {
+            currentValueInC = 5.0 / 9.0 * (current->value - 32);
+        }
+        else if (strcmp(current->unit, "K") == 0)
+        {
+            currentValueInC = current->value - 273.15;
+        }
+        else
+        {
+            currentValueInC = current->value;
+        }
+
+        if (currentValueInC > maximum)
+        {
+            maximum = currentValueInC;
+            originalUnit = current->unit;
+            x = current->x;
+            y = current->y;
+        }
+
+        current = current->next;
+    }
+
+    current = list;
+    while (current != NULL)
+    {
+        if (current->x == x && current->y == y)
         {
             maximum = current->value;
+            originalUnit = current->unit;
+            break;
         }
         current = current->next;
     }
-    return maximum;
+
+    tempInfoPointer currentInfo = NULL;
+    currentInfo = insertTempInfo(currentInfo, maximum, originalUnit);
+
+    return currentInfo;
 }
 
-double getAverageTemperature(temperaturePointer list)
+tempInfoPointer getAverageTemperature(temperaturePointer list, char *unit)
 {
     temperaturePointer current = list;
     int size = 0;
@@ -103,5 +147,4 @@ double getAverageTemperature(temperaturePointer list)
         current = current->next;
     }
     double avg = sum / size;
-    return avg;
 }

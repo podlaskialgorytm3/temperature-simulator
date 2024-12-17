@@ -55,13 +55,16 @@ int main(int argc, char **argv)
         }
         else if (feature == 5)
         {
-            double maximum = getMaximumTemperature(tempList);
-            printf("The maximum value: %.2f *C\n", maximum);
+            tempInfoPointer currentInfo = NULL;
+            currentInfo = getMaximumTemperature(tempList);
+            printf("The maximum value: %.2f *%s\n", currentInfo->value, currentInfo->unit);
         }
         else if (feature == 6)
         {
-            double average = getAverageTemperature(tempList);
-            // printf("The average value: %.2f *C\n", average);
+            char *unit = argv[3];
+            tempInfoPointer currentInfo = NULL;
+            currentInfo = getAverageTemperature(tempList, unit);
+            printf("The minimum value: %.2f *%s\n", currentInfo->value, currentInfo->unit);
         }
         writeToFile("data.txt", tempList);
     }
