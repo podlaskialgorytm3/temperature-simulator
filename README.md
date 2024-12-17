@@ -19,4 +19,4 @@ SETTER:
 GETTER:
 4 - get minimum temperature
 5 - get maximum temperature
-6 - get average of temperatures
+6 - get average of temperatures [unit = C | F | K]
