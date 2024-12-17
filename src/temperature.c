@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "../include/temperature.h"
 
 temperaturePointer insert(temperaturePointer list, int x, int y, double value, char *unit)
@@ -14,7 +15,7 @@ temperaturePointer insert(temperaturePointer list, int x, int y, double value, c
         newTemperature->x = x;
         newTemperature->y = y;
         newTemperature->value = value;
-        newTemperature->unit = unit;
+        newTemperature->unit = strdup(unit);
         newTemperature->next = NULL;
         return newTemperature;
     }
