@@ -64,7 +64,7 @@ int main(int argc, char **argv)
             char *unit = argv[3];
             tempInfoPointer currentInfo = NULL;
             currentInfo = getAverageTemperature(tempList, unit);
-            printf("The minimum value: %.2f *%s\n", currentInfo->value, currentInfo->unit);
+            printf("The average value: %.2f *%s\n", currentInfo->value, currentInfo->unit);
         }
         writeToFile("data.txt", tempList);
     }

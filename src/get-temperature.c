@@ -137,14 +137,83 @@ tempInfoPointer getMaximumTemperature(temperaturePointer list)
 
 tempInfoPointer getAverageTemperature(temperaturePointer list, char *unit)
 {
+    if (list == NULL || unit == NULL)
+    {
+        return NULL;
+    }
+
     temperaturePointer current = list;
-    int size = 0;
+    int count = 0;
     double sum = 0;
+
     while (current != NULL)
     {
-        sum += current->value;
-        size++;
+        double valueInTargetUnit = 0.0;
+
+        if (strcmp(unit, "C") == 0)
+        {
+            if (strcmp(current->unit, "F") == 0)
+            {
+                valueInTargetUnit = 5.0 / 9.0 * (current->value - 32);
+            }
+            else if (strcmp(current->unit, "K") == 0)
+            {
+                valueInTargetUnit = current->value - 273.15;
+            }
+            else
+            {
+                valueInTargetUnit = current->value;
+            }
+        }
+        else if (strcmp(unit, "F") == 0)
+        {
+            if (strcmp(current->unit, "C") == 0)
+            {
+                valueInTargetUnit = 9.0 / 5.0 * current->value + 32;
+            }
+            else if (strcmp(current->unit, "K") == 0)
+            {
+                valueInTargetUnit = 9.0 / 5.0 * (current->value - 273.15) + 32;
+            }
+            else
+            {
+                valueInTargetUnit = current->value;
+            }
+        }
+        else if (strcmp(unit, "K") == 0)
+        {
+            if (strcmp(current->unit, "C") == 0)
+            {
+                valueInTargetUnit = current->value + 273.15;
+            }
+            else if (strcmp(current->unit, "F") == 0)
+            {
+                valueInTargetUnit = 5.0 / 9.0 * (current->value - 32) + 273.15;
+            }
+            else
+            {
+                valueInTargetUnit = current->value;
+            }
+        }
+        else
+        {
+            return NULL;
+        }
+
+        sum += valueInTargetUnit;
+        count++;
         current = current->next;
     }
-    double avg = sum / size;
+
+    if (count == 0)
+    {
+        return NULL;
+    }
+
+    double avg = sum / count;
+
+    tempInfoPointer avgInfo = NULL;
+    avgInfo = insertTempInfo(avgInfo, avg, unit);
+
+    return avgInfo;
 }
